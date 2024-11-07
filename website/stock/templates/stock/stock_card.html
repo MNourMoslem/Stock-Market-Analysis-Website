@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'stock_card.css' %}">
+
+{% block content %}
+    <div class="stock">
+        <div class="stock-card-header">
+            <h2 id="stock-card-symbol">{{ stock_symbol }}</h2>
+        </div>
+        <div class="stock-card-info">
+            <h4 id="stock-card-close">Close: {{ stock_close }}</h4>
+            <h4 id="stock-card-open">Open: {{ stock_open }}</h4>
+            <h4 id="stock-card-high">High: {{ stock_high }}</h4>
+            <h4 id="stock-card-low">Low: {{ stock_low }}</h4>
+            <h4 id="stock-card-volume">Volume: {{ stock_volume }}</h4>
+        </div>
+        <div class="stock-card-graph">
+            {% include 'graph/index.html' %}
+        </div>
+    </div>
+{% endblock %}

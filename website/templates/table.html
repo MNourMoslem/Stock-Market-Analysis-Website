@@ -1,0 +1,31 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'table.css' %}">
+
+<div class="table-window">
+    <div class="table-up-window">
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    {% for col in table_columns %}
+                        <th>{{ col }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for stock, row in table_data %}
+                <tr>
+                    {% for data in row %}
+                        {% if forloop.first %}
+                            <td>
+                                <a href="{% url 'stock_card' stock_symbol=stock.symbol %}">{{ data }}</a>
+                            </td>
+                        {% else %}
+                            <td>{{ data }}</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

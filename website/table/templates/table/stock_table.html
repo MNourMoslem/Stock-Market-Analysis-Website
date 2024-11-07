@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+
+{% block headblock %}
+    <link rel="stylesheet" href="{% static 'stock_table.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="stock-table">
+        <div class="table-header">
+            <h2 class="table-head-n-stocks"> {{ n_stocks }} Stocks</h2>
+        </div>
+        
+        {% include "table.html" %}
+    </div>
+{% endblock %}

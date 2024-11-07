@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% block headblock %} {% endblock %}
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="uwindow">
+            <div class="top-bar">
+                <div class="logo"></div>
+                <div id="main-sbar">
+                    {% include 'AutoComplete-Search/index.html' %}
+                </div>
+            </div>
+        </div>
+        <div class="dwindow">
+            <div class="lwindow">
+                <div class="sub_lwindow">
+                    <button onclick="window.location.href='/home';">Home</button>
+                    <button onclick="window.location.href='/table';">Stocks</button>
+                    <button>Comparison Tool</button>
+                    <button>By Industry</button>
+                    <button>Trending</button>
+                </div>
+            </div>
+            <div class="rwindow">
+                <div class="sub_rwindow">
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
