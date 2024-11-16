@@ -3,17 +3,13 @@
 {% load static %}
 
 
-{% block headblock %}
-    <link rel="stylesheet" href="{% static 'stock_table.css' %}">
-{% endblock %}
-
 {% block content %}
     <div class="home-window">
         <div class="home-window-header">
             <h2>Welcome To Stock Analysis</h2>
         </div>
         <div class="home-window-sbar">
-            {% include 'AutoComplete-Search/index.html' %}
+            {% include 'search-bar.html' %}
         </div>
     </div>    
 {% endblock %}

@@ -123,7 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATICFILES_DIRS = [
-    BASE_DIR / "templates",
+    BASE_DIR / "templates/static",
     "./table/templates/table/static",
     "./stock/templates/stock/static"
 ]

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Comparison</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="stockChart" width="800" height="400"></canvas>
+
+    <script>
+        // Stock data for two companies
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [
+                {
+                    label: 'Stock A',
+                    data: [150, 155, 160, 165, 170],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.4 // Smooth lines
+                },
+                {
+                    label: 'Stock B',
+                    data: [140, 145, 150, 155, 160],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderWidth: 2,
+                    tension: 0.4 // Smooth lines
+                }
+            ]
+        };
+
+        // Chart configuration
+        const config = {
+            type: 'line', // Line chart
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true, // Show legend
+                        position: 'top' // Legend position
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Stock Price ($)'
+                        }
+                    }
+                }
+            }
+        };
+
+        // Render the chart
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        const stockChart = new Chart(ctx, config);
+    </script>
+</body>
+</html>

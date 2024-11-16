@@ -3,35 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Stock Analyst</title>
     {% block headblock %} {% endblock %}
-
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
     <div class="container">
-        <div class="uwindow">
+        <div class="t-window">
             <div class="top-bar">
                 <div class="logo"></div>
                 <div id="main-sbar">
-                    {% include 'AutoComplete-Search/index.html' %}
+                    {% include 'search-bar.html' %}
                 </div>
             </div>
         </div>
-        <div class="dwindow">
-            <div class="lwindow">
-                <div class="sub_lwindow">
-                    <button onclick="window.location.href='/home';">Home</button>
-                    <button onclick="window.location.href='/table';">Stocks</button>
-                    <button>Comparison Tool</button>
-                    <button>By Industry</button>
-                    <button>Trending</button>
+        <div class="d-window">
+            <div class="dl-window">
+                <div class="sdl-window">
+                    <a href="/home" class="page-linker">Home</a>
+                    <a href="/table" class="page-linker">Stocks</a>
+                    <a href="/comparison" class="page-linker">Comparison Tool</a>
+                    <a href="/byindustry" class="page-linker">By Industry</a>
+                    <a href="/trending" class="page-linker">Trending</a>
                 </div>
             </div>
-            <div class="rwindow">
-                <div class="sub_rwindow">
+            <div class="dr-window">
+                <div class="sdr-window">
                     {% block content %} {% endblock %}
                 </div>
             </div>

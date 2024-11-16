@@ -2,17 +2,17 @@
 
 {% load static %}
 
-
-{% block headblock %}
-    <link rel="stylesheet" href="{% static 'stock_table.css' %}">
-{% endblock %}
-
 {% block content %}
-    <div class="stock-table">
+    <link rel="stylesheet" href="{% static 'stock_table.css' %}">
+    <div class="table-cont">
         <div class="table-header">
-            <h2 class="table-head-n-stocks"> {{ n_stocks }} Stocks</h2>
+            <h2> {{ n_stocks }} Stocks</h2>
         </div>
-        
-        {% include "table.html" %}
+        <div class="table-searchBar">
+            {% include 'search-bar.html' %}
+        </div>
+        <div class="table-stock-table">
+            {% include "table.html" %}
+        </div>
     </div>
 {% endblock %}
