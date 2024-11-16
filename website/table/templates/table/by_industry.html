@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'by_industry.css' %}">
+    <div class="by-industry-cont">
+        <h2>By Industry<h2>
+
+        {% for row in sectors %}
+            <h2 class="sector-name">{{ row.0 }}</h2>
+            {% for industry in row.1 %}
+                <a href="{% url 'industry_table' industry_id=industry.id %}" class="industry-name">{{ industry.name }}</a>
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock %}

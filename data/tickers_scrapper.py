@@ -10,7 +10,7 @@ ptn = "\(\'[A-Za-z]+"
 N = 5000
 i = 0
 
-tickers = [0] * N
+tickers = set()
 
 with open(data_dir + "valid_tickers.csv", 'r') as file:
     file.readline()
@@ -18,7 +18,7 @@ with open(data_dir + "valid_tickers.csv", 'r') as file:
         line = file.readline()
         ticker = re.findall(ptn, line)
         if ticker:
-            tickers[i] = ticker[0][2:]
+            tickers.add(ticker[0][2:])
             i+=1
 
 df = pd.DataFrame(data = tickers ,columns=["tickers"])
