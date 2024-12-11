@@ -1,0 +1,22 @@
+{% extends 'stock/main.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'stock/css/by_country.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="countries-container">
+    {% for country in countries %}
+    <a href="{% url 'country_stocks' country_id=country.id %}" class="country-card">
+        <h2 class="country-title">{{ country.name }}</h2>
+        <div class="country-stats">
+            <span class="stock-count">
+                Stocks: {{ country.stock_count }}
+            </span>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+{% endblock %} 

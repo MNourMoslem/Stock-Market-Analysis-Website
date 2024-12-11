@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bar with Roles</title>
+    <style>
+        .search-container {
+            position: relative;
+            width: 300px;
+            margin: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .recommendations {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+
+        .recommendations div {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .recommendations div:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Search Bar for General Search -->
+    <div class="search-container" data-role="general">
+        <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search..." 
+            autocomplete="off"
+        />
+        <div class="recommendations"></div>
+    </div>
+
+    <!-- Search Bar for Adding to a List -->
+    <div class="search-container" data-role="add-to-list">
+        <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Add to list..." 
+            autocomplete="off"
+        />
+        <div class="recommendations"></div>
+    </div>
+
+    <script>
+        // Predefined recommendations
+        const allRecommendations = [
+            "Apple",
+            "Banana",
+            "Cherry",
+            "Date",
+            "Grape",
+            "Pineapple",
+            "Strawberry"
+        ];
+
+        // Attach event listeners to all search inputs
+        document.querySelectorAll('.search-container').forEach(container => {
+            const input = container.querySelector('.search-input');
+            const recommendationsDiv = container.querySelector('.recommendations');
+
+            let filteredOptions = [];
+
+            // Filter recommendations based on user input
+            function filterRecommendations() {
+                const query = input.value.trim().toLowerCase();
+                filteredOptions = allRecommendations.filter(item => item.toLowerCase().startsWith(query));
+                populateRecommendations(filteredOptions);
+            }
+
+            // Populate the recommendations dropdown
+            function populateRecommendations(recommendations) {
+                recommendationsDiv.innerHTML = "";
+
+                if (recommendations.length === 0) {
+                    recommendationsDiv.style.display = "none";
+                    return;
+                }
+
+                recommendations.forEach(item => {
+                    const div = document.createElement("div");
+                    div.textContent = item;
+                    div.addEventListener("click", () => {
+                        selectRecommendation(item);
+                    });
+                    recommendationsDiv.appendChild(div);
+                });
+
+                recommendationsDiv.style.display = "block";
+            }
+
+            // Handle "Enter" key to select the first recommendation
+            function handleEnter(event) {
+                if (event.key === "Enter" && filteredOptions.length > 0) {
+                    selectRecommendation(filteredOptions[0]);
+                }
+            }
+
+            // Select a recommendation
+            function selectRecommendation(item) {
+                const role = container.dataset.role;
+
+                if (role === "general") {
+                    alert(`You selected: ${item} (General Search)`);
+                } else if (role === "add-to-list") {
+                    alert(`You added: ${item} to the list`);
+                }
+
+                input.value = item;
+                recommendationsDiv.innerHTML = ""; // Clear recommendations
+                recommendationsDiv.style.display = "none";
+            }
+
+            // Attach event listeners
+            input.addEventListener("input", filterRecommendations);
+            input.addEventListener("keydown", handleEnter);
+
+            // Hide recommendations dropdown when clicking outside
+            document.addEventListener("click", (e) => {
+                if (!container.contains(e.target)) {
+                    recommendationsDiv.style.display = "none";
+                }
+            });
+        });
+    </script>
+</body>
+</html>

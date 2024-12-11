@@ -1,0 +1,33 @@
+<div class="stock-table-container">
+    {% if stocks %}
+    <div class="stock-table-header">
+        <div class="stock-table-title">{{ stocks|length }} Stocks</div>
+    </div>
+    <table class="stock-table">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                {% for column in columns %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td class="symbol-cell">
+                    <a href="{% url 'stock_detail' symbol=stock.symbol %}">{{ stock.symbol }}</a>
+                </td>
+                {% for field in stock.fields %}
+                    <td>{{ field }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="no-data">
+        <p>No stocks available</p>
+    </div>
+    {% endif %}
+</div> 

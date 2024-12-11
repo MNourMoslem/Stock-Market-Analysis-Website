@@ -1,0 +1,6 @@
+./index.html
+./test.py
+./data/*.csv
+
+website/db.sqlite3
+db.sqlite3

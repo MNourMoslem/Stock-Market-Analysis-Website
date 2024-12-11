@@ -1,0 +1,27 @@
+{% extends 'stock/main.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'stock/css/by_industry.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="sectors-container">
+    {% for sector in sectors %}
+    <div class="sector-card">
+        <h2 class="sector-title">{{ sector.name }}</h2>
+        <div class="industries-grid">
+            {% for industry in sector.industries %}
+            <a href="{% url 'industry_stocks' industry_id=industry.id %}" class="industry-card">
+                <h3>{{ industry.name }}</h3>
+                <div class="industry-stats">
+                    <span>Stocks: {{ industry.stock_count }}</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

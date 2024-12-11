@@ -1,0 +1,11 @@
+{% load static %}
+
+<div class="stock-search-container" data-callback="{{ callback_function|default:'defaultSearchCallback' }}">
+    <div class="search-input-container">
+        <input type="text" 
+               class="stock-search-input" 
+               placeholder="Search stocks by symbol..."
+               autocomplete="off">
+        <div class="search-suggestions"></div>
+    </div>
+</div> 

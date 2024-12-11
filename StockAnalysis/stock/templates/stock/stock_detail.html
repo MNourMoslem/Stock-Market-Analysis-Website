@@ -1,0 +1,93 @@
+{% extends 'stock/main.html' %}
+{% load static %}
+{% load stock_filters %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'stock/css/stock_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="stock-detail-container">
+    <!-- Header Section -->
+    <div class="stock-header">
+        <h1>{{ stock.symbol }} - {{ stock.brand }}</h1>
+        <div class="stock-price">{{ stock.price|format_currency }}</div>
+    </div>
+
+    <!-- Information Grid Section -->
+    <div class="stock-info-grid">
+        <div class="info-card">
+            <h3>Basic Information</h3>
+            <table class="info-table">
+                <tr>
+                    <td>Sector:</td>
+                    <td>{{ stock.industry.sector.name }}</td>
+                </tr>
+                <tr>
+                    <td>Industry:</td>
+                    <td>{{ stock.industry.name }}</td>
+                </tr>
+                <tr>
+                    <td>Country:</td>
+                    <td>{{ stock.country.name }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-card">
+            <h3>Latest Trading Data</h3>
+            <table class="info-table">
+                <tr>
+                    <td>Open Price:</td>
+                    <td>{{ last_history.open_price|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>High Price:</td>
+                    <td>{{ last_history.high_price|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Low Price:</td>
+                    <td>{{ last_history.low_price|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Close Price:</td>
+                    <td>{{ last_history.close_price|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Volume:</td>
+                    <td>{{ last_history.volume|format_large_number }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-card">
+            <h3>Additional Metrics</h3>
+            <table class="info-table">
+                <tr>
+                    <td>Market Cap:</td>
+                    <td>{{ stock.market_cap|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Shares Outstanding:</td>
+                    <td>{{ last_history.shares_outstanding|format_large_number }}</td>
+                </tr>
+                <tr>
+                    <td>Dividends:</td>
+                    <td>{{ last_history.dividends|format_currency }}</td>
+                </tr>
+                <tr>
+                    <td>Stock Splits:</td>
+                    <td>{{ last_history.stock_splits|default:'-' }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Chart Section -->
+    {% include 'stock/components/stock_chart.html' with chart_name='stock_price_chart' title='Stock Price Chart' %}
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'stock/js/init_stock_chart.js' %}"></script>
+{% endblock %}

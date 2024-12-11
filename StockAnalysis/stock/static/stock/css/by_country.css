@@ -1,0 +1,46 @@
+.countries-container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.country-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.country-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.country-title {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.country-stats {
+    text-align: right;
+}
+
+.stock-count {
+    color: #666;
+    font-size: 0.9em;
+    padding: 5px 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    .countries-container {
+        grid-template-columns: 1fr;
+    }
+} 

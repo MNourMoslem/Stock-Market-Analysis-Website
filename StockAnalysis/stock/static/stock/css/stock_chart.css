@@ -1,0 +1,46 @@
+.chart-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-title {
+    color: #2c3e50;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.chart-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.time-range-button {
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.time-range-button.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.chart-canvas-container {
+    position: relative;
+    height: 400px;
+    width: 100%;
+}

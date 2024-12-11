@@ -1,0 +1,47 @@
+{% extends 'stock/main.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'stock/css/compare.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="compare-container">
+    <div class="compare-controls">
+        <div class="search-section">
+            {% include 'stock/components/stock_search.html' with callback_function='comparePageCallback' %}
+        </div>
+        <div class="metric-selector">
+            <select id="compareMetric">
+                {% for metric_key, metric_info in metrics.items %}
+                    <option value="{{ metric_key }}" data-type="{{ metric_info.type }}">
+                        {{ metric_info.label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div class="selected-stocks"></div>
+
+    {% include 'stock/components/stock_chart.html' with chart_name='compare_chart' title='Comparison Chart' %}
+
+    <div class="stock-table-container">
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    {% for column_name in columns.keys %}
+                        <th>{{ column_name }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'stock/js/compare_page.js' %}"></script>
+{% endblock %}

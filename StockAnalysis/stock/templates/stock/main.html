@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Analysis</title>
+    <link rel="stylesheet" href="{% static 'stock/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'stock/css/stock_search.css' %}">
+    <link rel="stylesheet" href="{% static 'stock/css/stock_chart.css' %}">
+    <link rel="stylesheet" href="{% static 'stock/css/stock_table.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="topbar">
+        <div class="logo">Stock Analysis</div>
+        <div class="search-wrapper">
+            {% include 'stock/components/stock_search.html' with action_url=search_url callback_function='handleTopBarSearch' %}
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <ul class="nav-links">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'stock_list' %}">Stocks List</a></li>
+                <li><a href="{% url 'by_industry' %}">By Industry</a></li>
+                <li><a href="{% url 'by_country' %}">By Country</a></li>
+                <li><a href="{% url 'compare'%}">Compare</a></li>
+            </ul>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    {% csrf_token %}
+    <script src="{% static 'stock/js/stock_search.js' %}"></script>
+    {% block extra_js %}
+    {% endblock %}
+</body>
+</html> 
