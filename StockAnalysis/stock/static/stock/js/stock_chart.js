@@ -164,17 +164,41 @@ class StockChart {
         });
     }
 
-    updateData(data) {
-        if (data.labels && data.labels.length > 200) {
-            const skipFactor = Math.floor(data.labels.length / 200);
-            data.labels = data.labels.filter((_, i) => i % skipFactor === 0);
-            data.datasets = data.datasets.map(dataset => ({
-                ...dataset,
-                data: dataset.data.filter((_, i) => i % skipFactor === 0)
-            }));
-        }
-
-        this.chart.data = data;
-        this.chart.update();
+updateData(data) {
+    if (data.labels && data.labels.length > 200) {
+        const skipFactor = Math.floor(data.labels.length / 200);
+        data.labels = data.labels.filter((_, i) => i % skipFactor === 0);
+        data.datasets = data.datasets.map(dataset => ({
+            ...dataset,
+            data: dataset.data.filter((_, i) => i % skipFactor === 0)
+        }));
     }
+
+    // Update chart data
+    this.chart.data = data;
+    this.chart.update();
+
+    // Dynamically update price color
+    this.updatePriceColor();
+}
+
+updatePriceColor() {
+    const priceElement = document.querySelector('.stock-price'); // Select the price element
+    if (!priceElement) return;
+
+    // Assuming last two data points represent the current and previous price
+    const currentPrice = this.chart.data.datasets[0]?.data.slice(-1)[0]; // Latest price
+    const previousPrice = this.chart.data.datasets[0]?.data.slice(-2, -1)[0]; // Second to last price
+
+    if (currentPrice !== undefined && previousPrice !== undefined) {
+        if (currentPrice > previousPrice) {
+            priceElement.style.color = '#27ae60'; // Green for positive change
+        } else if (currentPrice < previousPrice) {
+            priceElement.style.color = '#e74c3c'; // Red for negative change
+        } else {
+            priceElement.style.color = '#2c3e50'; // Neutral color
+        }
+    }
+}
+
 }

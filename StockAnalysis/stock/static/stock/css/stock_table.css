@@ -1,7 +1,11 @@
 .stock-table-container {
+    display: block;
+    max-width: 100%;
     padding: 20px;
     overflow-x: auto;
-    background-color: white;
+    overflow-y: auto; /* Allow vertical scroll */
+    background-color: transparent;
+    max-height: 100vh; /* Set a max height for the table container */
 }
 
 .stock-table-header {
@@ -19,10 +23,18 @@
 }
 
 .stock-table {
+    min-width: 800px;
     width: 100%;
     border-collapse: collapse;
     background-color: white;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.stock-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa; /* Header background */
+    z-index: 10; /* Stay above other elements */
+    border-bottom: 2px solid #ddd;
 }
 
 .stock-table th,
@@ -37,11 +49,20 @@
     font-weight: 600;
     color: #2c3e50;
 }
-
-.stock-table tr:hover {
-    background-color: #f5f6fa;
+.stock-table tr {
+        cursor: pointer; /* Indicate clickability */
+        transition: background-color 0.3s ease;
 }
 
+.stock-table tr:hover {
+    background-color: #e0f1ff;
+}
+.stock-table tbody tr:nth-child(even) {
+    background-color: #e8eaec; /* Stronger gray */
+}
+.stock-table tbody tr:nth-child(even):hover {
+    background-color: #d9dbdd; /* Slightly darker gray on hover */
+}
 .symbol-cell a {
     color: #3498db;
     text-decoration: none;
@@ -57,13 +78,31 @@
     text-align: center;
     padding: 40px;
     color: #666;
+    font-size: 1.2rem;
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
+
 
 /* Responsive design */
 @media (max-width: 768px) {
+
+
+
+    .stock-table tr:hover {
+        background-color: #e0e4e8; /* Darker hover effect */
+    }
+
+    .stock-table-container {
+        padding: 10px; /* Compact table on small screens */
+    }
+
     .stock-table th,
     .stock-table td {
-        padding: 8px 10px;
-        font-size: 14px;
+        padding: 8px 10px; /* Reduce padding */
+        font-size: 14px; /* Smaller font */
     }
-} 
+}
+

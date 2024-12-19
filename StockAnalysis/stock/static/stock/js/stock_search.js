@@ -113,37 +113,43 @@ class StockSearch {
         }
     }
 
-    renderSuggestions(results) {
-        if (results.length === 0) {
-            this.suggestionsDiv.innerHTML = `
-                <div class="no-suggestions">
-                    No results found
+renderSuggestions(results) {
+    if (results.length === 0) {
+        this.suggestionsDiv.innerHTML = `
+            <div class="no-suggestions">
+                No results found
+            </div>
+        `;
+        this.selectedIndex = -1;
+    } else {
+        this.suggestionsDiv.innerHTML = results.map(stock => `
+            <div class="suggestion-item" 
+                 data-symbol="${stock.symbol}"
+                 data-url="${stock.url}">
+                <div>
+                    <span class="symbol">${stock.symbol}</span>
+                    <span class="brand">${stock.brand}</span>
                 </div>
-            `;
-            this.selectedIndex = -1;
-        } else {
-            this.suggestionsDiv.innerHTML = results.map(stock => `
-                <div class="suggestion-item" 
-                     data-symbol="${stock.symbol}"
-                     data-url="${stock.url}">
-                    <div>
-                        <span class="symbol">${stock.symbol}</span>
-                        <span class="brand">${stock.brand}</span>
-                    </div>
-                    <div class="price">${stock.price}</div>
-                </div>
-            `).join('');
+                <div class="price">${stock.price}</div>
+            </div>
+        `).join('');
 
-            this.suggestionsDiv.querySelectorAll('.suggestion-item').forEach(item => {
-                item.addEventListener('click', (e) => this.handleSuggestionClick(e));
+        const suggestionItems = this.suggestionsDiv.querySelectorAll('.suggestion-item');
+
+        // Add event listeners for click and hover
+        suggestionItems.forEach((item, index) => {
+            item.addEventListener('click', (e) => this.handleSuggestionClick(e));
+            item.addEventListener('mouseenter', () => {
+                this.updateSelection(index); // Update selection on hover
             });
-            
-            this.selectedIndex = 0;
-            this.updateSelection(0);
-        }
-        
-        this.suggestionsDiv.classList.add('active');
+        });
+
+        this.selectedIndex = 0;
+        this.updateSelection(0);
     }
+
+    this.suggestionsDiv.classList.add('active');
+}
 
     handleSuggestionClick(e) {
         const item = e.currentTarget;

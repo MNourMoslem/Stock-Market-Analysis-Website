@@ -1,11 +1,15 @@
 .chart-container {
     background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 12px; /* Slightly more rounded */
+    border: 1px solid #e1e6eb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Stronger shadow */
     padding: 20px;
     margin-bottom: 30px;
+    transition: box-shadow 0.3s ease;
 }
-
+.chart-container:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Interactive hover */
+}
 .chart-header {
     display: flex;
     justify-content: space-between;
@@ -30,17 +34,48 @@
     border-radius: 4px;
     background: white;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.1s;
 }
-
+.time-range-button:hover {
+    background-color: #d4e4f3; /* Light blue hover */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px); /* Subtle lift effect */
+}
 .time-range-button.active {
     background: #3498db;
     color: white;
     border-color: #3498db;
+    box-shadow: 0 5px 6px rgba(0, 48, 142, 0.3);
 }
 
 .chart-canvas-container {
     position: relative;
     height: 400px;
     width: 100%;
+    overflow-x: auto; /* Horizontal scroll if needed */
+    overflow-y: hidden;
+    max-width: 100vw; /* Ensure it respects screen size */
+}
+
+@media (max-width: 768px) {
+    .chart-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .chart-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .time-range-button {
+        padding: 4px 8px; /* Smaller buttons */
+        font-size: 0.9rem;
+    }
+
+    .chart-canvas-container {
+        height: 300px; /* Reduce chart height */
+    }
 }
