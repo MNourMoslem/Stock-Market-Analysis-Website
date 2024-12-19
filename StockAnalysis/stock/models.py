@@ -30,8 +30,12 @@ class Stock(models.Model):
     def __str__(self):
         return f"{self.symbol} ({self.brand})"
 
-    def update_stock_from_history(self):
-        last_history = self.history_entries.order_by('-date').first()
+    def update_stock_from_history(self, from_date : str = None):
+        if from_date is None:
+            last_history = self.history_entries.order_by('-date').first()
+        else:
+            last_history = self.history_entries.filter(date__gte=from_date).order_by('-date').first()
+
         if last_history:
             self.price = last_history.close_price
             self.market_cap = last_history.market_cap

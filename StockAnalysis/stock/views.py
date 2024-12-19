@@ -1,9 +1,12 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Count, Q
 from .models import Stock, Sector, Industry, Country, History
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 import json
 from datetime import datetime, timedelta
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+# from load_data import load_data
 
 def stock_list(request):
     # جلب جميع الأسهم من قاعدة البيانات مرتبة حسب الرمز
@@ -176,6 +179,7 @@ def get_stock_history(request):
     if not symbol:
         return JsonResponse({'error': 'Symbol is required'}, status=400)
     
+    max_ = False
     end_date = datetime.now()
     if time_range == '1M':
         start_date = end_date - timedelta(days=30)
@@ -185,14 +189,21 @@ def get_stock_history(request):
         start_date = end_date - timedelta(days=180)
     elif time_range == '1Y':
         start_date = end_date - timedelta(days=365)
-    else:  # 5Y
+    elif time_range == '5Y' :
         start_date = end_date - timedelta(days=1825)
+    else:  
+        max_ = True
     
-    history = History.objects.filter(
-        stock__symbol=symbol,
-        date__range=(start_date, end_date)
-    ).order_by('date')
-    
+    if not max_:
+        history = History.objects.filter(
+            stock__symbol=symbol,
+            date__range=(start_date, end_date)
+        ).order_by('date')
+    else:
+        history = History.objects.filter(
+            stock__symbol=symbol
+        ).order_by('date')
+        
     dates = [entry.date.strftime('%Y-%m-%d') for entry in history]
     data = {
         'dates': dates,
@@ -249,3 +260,16 @@ def get_stock_details(request):
         })
     except Stock.DoesNotExist:
         return JsonResponse({'error': 'Stock not found'}, status=404)
+
+@method_decorator(csrf_exempt, name='dispatch')
+def update_stocks(request):
+    if request.method == 'POST':
+        token = request.META.get('HTTP_AUTHORIZATION')
+        if token == 'Bearer YOUR_SECRET_TOKEN':  # Check the token
+            # Your logic to update stocks goes here
+            # load_data()
+            # Return a 204 No Content response
+            return HttpResponse(status=204)
+        else:
+            return JsonResponse({'status': 'error', 'message': 'Unauthorized'}, status=403)
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)

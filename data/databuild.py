@@ -3,7 +3,8 @@ import requests
 import yfinance as yf
 from typing import List
 
-N = 1000
+N = 400
+prefix = "temp"
 
 tickers : List[yf.Ticker] = [None] * N
 
@@ -34,7 +35,11 @@ country_id = 1
 
 print("Collecting Data:")
 for i, ticker in enumerate(tickers[:N]):
-    info = ticker.info
+    try:
+        info = ticker.info
+    except:
+        dicard_count += 1
+        continue
 
     if 'symbol' not in info:
         dicard_count += 1
@@ -100,11 +105,11 @@ industry_df = pd.DataFrame({"name" : industry_dict.keys(), "sector_id" : ind2sec
 sector_df = pd.DataFrame(sector_dict.keys(), index=sector_dict.values(), columns=['name'])
 country_df = pd.DataFrame(country_dict.keys(), index=country_dict.values(), columns=['name'])
 
-stock_history.to_csv('./stock_history.csv')
-stock_info.to_csv('./stock_info.csv')
-industry_df.to_csv("stock_industry.csv", index_label='id')
-sector_df.to_csv("stock_sector.csv", index_label='id')
-country_df.to_csv("stock_country.csv", index_label='id')
+stock_history.to_csv(f'{prefix}_stock_history.csv')
+stock_info.to_csv(f'{prefix}_stock_info.csv')
+industry_df.to_csv(f"{prefix}_stock_industry.csv", index_label='id')
+sector_df.to_csv(f"{prefix}_stock_sector.csv", index_label='id')
+country_df.to_csv(f"{prefix}_stock_country.csv", index_label='id')
 
 print(stock_history)
 print(stock_info)
