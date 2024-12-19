@@ -23,7 +23,6 @@
     font-weight: bold;
     color: #27ae60;
     padding: 10px 20px;
-    background-color: #f8f9fa;
     border-radius: 5px;
 }
 
@@ -46,6 +45,14 @@
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 1px solid #eee;
+}
+.info-card, .description-card {
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.info-card:hover, .description-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+    transform: translateY(-5px); /* Slight lift effect */
 }
 
 .info-table {

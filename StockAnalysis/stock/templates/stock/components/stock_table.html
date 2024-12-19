@@ -13,21 +13,35 @@
             </tr>
         </thead>
         <tbody>
-            {% for stock in stocks %}
-            <tr>
-                <td class="symbol-cell">
-                    <a href="{% url 'stock_detail' symbol=stock.symbol %}">{{ stock.symbol }}</a>
-                </td>
-                {% for field in stock.fields %}
-                    <td>{{ field }}</td>
-                {% endfor %}
-            </tr>
+        {% for stock in stocks %}
+        <tr data-url="{% url 'stock_detail' symbol=stock.symbol %}" class="clickable-row">
+            <td class="symbol-cell">
+                <a href="{% url 'stock_detail' symbol=stock.symbol %}">{{ stock.symbol }}</a>
+            </td>
+            {% for field in stock.fields %}
+                <td>{{ field }}</td>
             {% endfor %}
-        </tbody>
+        </tr>
+        {% endfor %}
+    </tbody>
     </table>
     {% else %}
     <div class="no-data">
         <p>No stocks available</p>
     </div>
     {% endif %}
-</div> 
+</div>
+<script>
+    // Add event listener to all rows with the "clickable-row" class
+    document.addEventListener('DOMContentLoaded', function () {
+        const rows = document.querySelectorAll('.clickable-row');
+        rows.forEach(row => {
+            row.addEventListener('click', () => {
+                const url = row.dataset.url;
+                if (url) {
+                    window.location.href = url; // Redirect to the URL
+                }
+            });
+        });
+    });
+</script>

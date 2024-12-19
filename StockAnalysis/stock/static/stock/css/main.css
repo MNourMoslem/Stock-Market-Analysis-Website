@@ -6,16 +6,17 @@
 
 body {
     font-family: 'Poppins', Arial, sans-serif;
-    background-color: #ecf0f3; 
+    background-color: #ecf0f3;
     color: #333;
 }
 
 .topbar {
-    background: linear-gradient(135deg, #2c3e50, #3b4f60); 
+    background: linear-gradient(135deg, #2c3e50, #4b5d6b);
     color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
     height: 60px;
     padding: 0 20px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
@@ -26,6 +27,7 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
     color: #ecf0f3;
+
 }
 
 .search-wrapper {
@@ -37,33 +39,39 @@ body {
     padding: 10px 15px;
     width: 100%;
     border: none;
-    border-radius: 25px;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #ffffff;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
     font-size: 1rem;
     transition: all 0.3s ease;
+    color: #ecf0f1; /* Default text color */
 }
 
 .topbar .stock-search-input::placeholder {
     color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease; /* Smooth transition for placeholder */
 }
 
 .topbar .stock-search-input:focus {
-    background-color: white;
-    color: #2c3e50;
+    background-color: #f8f9fa;
+    color: #2c3e50; /* Text color on focus */
     outline: none;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.topbar .stock-search-input:focus::placeholder {
+    color: rgba(52, 73, 94, 0.6); /* Placeholder color on focus */
 }
 
 .container {
     display: flex;
     min-height: calc(100vh - 60px);
+    max-width: 100%;
+    overflow: auto;
 }
 
 .sidebar {
     width: 250px;
-    background: linear-gradient(180deg, #2c3e50, #34495e); 
-    
+    background: white;
     padding: 1.5rem 1rem;
     color: #ffffff;
     box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
@@ -79,7 +87,7 @@ body {
 
 .nav-links a {
     text-decoration: none;
-    color: #f4f6f7;
+    color: #2C3E50FF;
     font-size: 1rem;
     display: block;
     padding: 10px 15px;
@@ -90,13 +98,14 @@ body {
 .nav-links a:hover {
     background: linear-gradient(to right, #3498db, #6ab0de);
     color: #ffffff;
+    transform: translateX(8px);
     box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
 }
 
 .main-content {
     flex: 1;
     padding: 2rem;
-    background: linear-gradient(to bottom right, #ffffff, #f4f7f9);
+    background: linear-gradient(to bottom, #ffffff, #e1e1e1);
     border-radius: 15px;
     margin: 2rem;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -154,6 +163,9 @@ body {
         margin: 0 10px;
     }
 
+    .topbar {
+        width: 100vw;
+    }
     .topbar .logo {
         font-size: 1.5rem;
     }

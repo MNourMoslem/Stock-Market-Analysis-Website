@@ -4,11 +4,15 @@
     align-items: center;
     min-height: calc(100vh - 60px);
     padding: 20px;
-    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
+    background: #f8f9fa;
+    background: linear-gradient(to bottom, #ffffff, #e1e1e1);
 }
 
 .home-content {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 800px;
     width: 100%;
     padding: 50px 30px;
@@ -24,7 +28,7 @@
 }
 
 .home-title {
-    font-size: 3.2rem;
+font-size: 3.2rem;
     color: #2c3e50;
     margin-bottom: 20px;
     font-weight: 700;
@@ -42,7 +46,6 @@
     margin: 10px auto 0;
     border-radius: 2px;
 }
-
 .home-subtitle {
     font-size: 1.3rem;
     color: #555;
@@ -66,7 +69,7 @@
 .home-search .stock-search-input {
     font-size: 1.2rem;
     padding: 15px 20px;
-    width: 150%;
+    width: 100%;
     border: 2px solid #ddd;
     border-radius: 25px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
