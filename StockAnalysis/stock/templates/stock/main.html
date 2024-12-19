@@ -16,7 +16,9 @@
 <body>
     <!-- Top Navigation Bar -->
     <div class="topbar">
-        <div class="logo">Stock Analysis</div>
+        <div class="logo"> <a href="{% url 'home' %}" style="text-decoration: none; color: inherit;">
+            Stock Analysis
+        </a></div>
         <div class="search-wrapper">
             {% include 'stock/components/stock_search.html' with action_url=search_url callback_function='handleTopBarSearch' %}
         </div>

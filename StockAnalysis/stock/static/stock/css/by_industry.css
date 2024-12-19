@@ -1,54 +1,113 @@
-.sectors-container {
-    padding: 20px;
-}
-
-.sector-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 30px;
-    padding: 20px;
-}
-
-.sector-title {
-    color: #2c3e50;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #eee;
-    margin-bottom: 20px;
-}
-
 .industries-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
+    padding: 20px;
+    background-color: transparent;
+
 }
 
 .industry-card {
-    background-color: #f8f9fa;
-    border-radius: 6px;
-    padding: 15px;
+    background: linear-gradient(to bottom right, #f9f9fb, #e9ecef);
+    border-radius: 12px;
+    padding: 20px;
+    border: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    position: relative;
     text-decoration: none;
-    color: inherit;
-    transition: transform 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+    min-height: 150px;
+}
+
+.sector-title {
+    overflow: hidden;
+}
+
+.industry-card:nth-child(odd) {
+    background: linear-gradient(to bottom right, #f4f6f9, #dfe4ea);
+}
+
+.industry-card:nth-child(even) {
+    background: linear-gradient(to bottom right, #f2f6fc, #e3edf7);
 }
 
 .industry-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.industry-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(52, 152, 219, 0.2), transparent);
+    transform: skewX(-45deg);
+    transition: 0.7s ease;
+}
+
+.industry-card:hover::before {
+    left: 50%;
 }
 
 .industry-card h3 {
     color: #2c3e50;
     margin-bottom: 10px;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+    text-decoration: none;
+
+}
+
+.industry-card:hover h3 {
+    color: #3498db;
 }
 
 .industry-stats {
-    color: #666;
+    position: absolute; /* Fix position relative to .industry-card */
+    bottom: 20px; /* Distance from the bottom of the card */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    display: inline-block;
     font-size: 0.9em;
+    padding: 8px 12px;
+    color: #ffffff;
+    border-radius: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+}
+
+.industry-card:nth-child(odd) .industry-stats {
+    background: linear-gradient(to right, #1abc9c, #2ecc71);
+}
+
+.industry-card:nth-child(even) .industry-stats {
+    background: linear-gradient(to right, #8e44ad, #9b59b6);
+}
+
+.industry-card:hover .industry-stats {
+    transform: translateX(-50%) scale(1.05); /* Keep centering intact while scaling */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
     .industries-grid {
         grid-template-columns: 1fr;
+    }
+    .industry-card h3 {
+        font-size: 1.2em;
+    }
+
+    .industry-stats {
+        font-size: 0.8em;
     }
 } 
