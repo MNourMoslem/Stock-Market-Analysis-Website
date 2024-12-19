@@ -13,4 +13,5 @@ urlpatterns = [
     path('api/stock-history/', views.get_stock_history, name='stock_history'),
     path('compare/', views.compare, name='compare'),
     path('api/stock-details/', views.get_stock_details, name='stock_details'),
+    path('api/update-stocks/', views.update_stocks, name='update_stocks'),
 ]
