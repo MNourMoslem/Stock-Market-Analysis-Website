@@ -7,13 +7,11 @@
 body {
     font-family: 'Poppins', Arial, sans-serif;
     background-color: #ecf0f3; 
-    
     color: #333;
 }
 
 .topbar {
     background: linear-gradient(135deg, #2c3e50, #3b4f60); 
-    
     color: white;
     display: flex;
     align-items: center;
@@ -28,7 +26,6 @@ body {
     font-weight: 700;
     letter-spacing: 1px;
     color: #ecf0f3;
-    
 }
 
 .search-wrapper {
@@ -93,7 +90,6 @@ body {
 .nav-links a:hover {
     background: linear-gradient(to right, #3498db, #6ab0de);
     color: #ffffff;
-    transform: translateX(8px);
     box-shadow: 0 4px 8px rgba(52, 152, 219, 0.2);
 }
 
@@ -108,7 +104,6 @@ body {
 }
 
 .main-content:hover {
-    transform: scale(1.02);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
