@@ -4,31 +4,52 @@
     align-items: center;
     min-height: calc(100vh - 60px);
     padding: 20px;
-    background-color: #f8f9fa;
+    background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
 }
 
 .home-content {
     text-align: center;
     max-width: 800px;
     width: 100%;
-    padding: 40px 20px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    padding: 50px 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.home-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15), 0 8px 10px rgba(0, 0, 0, 0.1);
 }
 
 .home-title {
-    font-size: 3.5rem;
+    font-size: 3.2rem;
     color: #2c3e50;
     margin-bottom: 20px;
     font-weight: 700;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.home-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: #3498db;
+    margin: 10px auto 0;
+    border-radius: 2px;
 }
 
 .home-subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 40px;
-    line-height: 1.6;
+    font-size: 1.3rem;
+    color: #555;
+    margin-bottom: 30px;
+    line-height: 1.8;
+    font-weight: 400;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
 .home-search {
@@ -37,39 +58,64 @@
 }
 
 .home-search .stock-search-container {
-    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .home-search .stock-search-input {
     font-size: 1.2rem;
     padding: 15px 20px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
+    width: 150%;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    outline: none;
 }
 
 .home-search .stock-search-input:focus {
     border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+    background-color: #fdfdfd;
+    transform: scale(1.02);
+}
+
+.home-search .stock-search-input::placeholder {
+    color: #aaa;
+    transition: color 0.3s ease;
+}
+
+.home-search .stock-search-input:focus::placeholder {
+    color: #3498db;
 }
 
 .home-search .search-suggestions {
     text-align: left;
     margin-top: 8px;
+    padding: 10px;
+    background: #ffffff;
     border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.home-search .search-suggestions:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 768px) {
     .home-title {
         font-size: 2.5rem;
     }
-    
+
     .home-subtitle {
         font-size: 1rem;
+        margin-bottom: 20px;
     }
-    
+
     .home-search .stock-search-input {
         font-size: 1rem;
-        padding: 12px 16px;
+        padding: 12px 15px;
     }
-} 
+}
